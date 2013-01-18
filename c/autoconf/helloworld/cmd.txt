@@ -1,0 +1,29 @@
+$:autoscan
+$:mv configure.scan configure.in
+$:vim configure.in
+#                                               -*- Autoconf -*-
+# Process this file with autoconf to produce a configure script.
+AC_INIT(helloworld.c)
+AM_INIT_AUTOMAKE(helloworld, 1.0)
+# Checks for programs.
+AC_PROG_CC
+# Checks for libraries.
+# Checks for header files.
+# Checks for typedefs, structures, and compiler characteristics.
+# Checks for library functions.
+AC_OUTPUT(Makefile)
+
+
+$:aclocal
+$:autoconf
+
+
+$:vim Makefile.am
+AUTOMAKE_OPTIONS=foreign
+bin_PROGRAMS=helloworld
+helloworld_SOURCES=helloworld.c
+
+
+$:automake --add-missing
+$:./configure
+$:make
