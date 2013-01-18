@@ -1,3 +1,5 @@
+site:http://wenku.baidu.com/view/fd4876b9960590c69ec3766f.html
+
 $:autoscan
 $:mv configure.scan configure.in
 $:vim configure.in
