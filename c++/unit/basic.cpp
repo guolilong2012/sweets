@@ -1,11 +1,38 @@
 #include <stdio.h>
+#include <iostream>
 #include <map>
 #include <vector>
 #include <string>
 using namespace std;
 
+class Test {
+public:
+    Test() {}; //c++ OK
+    ~Test() {};
+
+public:
+    enum { //used in class
+        ONE = 1,
+    };
+
+    struct A { //used in class
+        A() { printf("Hello A\n"); };
+        ~A() {};
+    };
+
+    void PirntOneA(void) { printf("ONE = <%d>\n", ONE); struct A a; };
+};
+
+struct B {
+    B() { printf("Hello B\n"); }; //default public
+    ~B() {};
+};
+
 int main(void)
 {
+    cout << "Hello World" << endl;
+
+    //string
     string strMyString = "Hello World";
     printf("strMyString = <%s>\n" \
            "strMyString.size() = <%d>\n" \
@@ -19,6 +46,7 @@ int main(void)
            strMyString.at(0) \
            );
 
+    //vector
     typedef std::vector<int> INT_ARRAY;
     INT_ARRAY intArray;
     intArray.push_back(1);
@@ -32,6 +60,7 @@ int main(void)
         printf("iter = <%d>\n",  *iter);
     }
 
+    //map
     typedef map<string, string> MAP_ARRAY;
     MAP_ARRAY mapArray;
     mapArray["Hello"] = "World";
@@ -40,6 +69,15 @@ int main(void)
     {
         printf("mapArray[\"Hello\"] = <%s>\n", (*iter).second.c_str());
     }
+
+    //struct
+    Test test;
+    //printf("ONE = <%d>\n", ONE); //error
+    //struct A a; //error
+    test.PirntOneA();
+
+    struct B b;
+    B c; //c++ OK
 
     return 0;
 }
