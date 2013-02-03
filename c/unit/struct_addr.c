@@ -2,7 +2,7 @@
 
 #define offsetof(TYPE, MEMBER) ((unsigned int)(&((TYPE *)0)->MEMBER))
 #define struct_addr(MEMBER_ADDR, TYPE, MEMBER) \
-		(((unsigned int)MEMBER_ADDR) - (offsetof(TYPE, MEMBER)))
+		((TYPE *)(((unsigned int)MEMBER_ADDR) - (offsetof(TYPE, MEMBER))))
 
 typedef struct {
 	int a;
@@ -19,7 +19,7 @@ int main(void)
 	printf("offsetof(TEST, b) = <%u>\n", offsetof(TEST, b));
 	printf("addr(test) = <%p>\n", &test);
 	printf("struct_addr(&test->b, TEST, b) = <%p>\n", \
-		(void *)struct_addr(&test.b, TEST, b));
+		struct_addr(&test.b, TEST, b));
 
 	return 0;
 }
