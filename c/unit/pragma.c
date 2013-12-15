@@ -2,7 +2,7 @@
 #include <netinet/in.h>
 
 //字节对齐
-//arm - 4(int) 2(short)
+//arm - 4(int) 2(short) - armv6指令集(arm11支持)可一字节对齐
 //mips、x86、powerpc - 可一字节
 
 //字节序
