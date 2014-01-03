@@ -2,9 +2,10 @@
 
 #define LITTLE_ENDIAN 0x11223344
 #define BIG_ENDIAN 0x44332211
-//#define BYTE_ORDER BIG_ENDIAN
-#define BYTE_ORDER LITTLE_ENDIAN
+#define BYTE_ORDER BIG_ENDIAN
+//#define BYTE_ORDER LITTLE_ENDIAN
 
+#if 0
 typedef union test
 {
 	struct {
@@ -17,6 +18,23 @@ typedef union test
 	unsigned char d:2,
 		      c:1,
 		      b:2,
+		      a:3;
+#endif
+	};
+	unsigned char e;
+} TEST;
+#endif
+
+typedef union test
+{
+	struct {
+#if BYTE_ORDER == LITTLE_ENDIAN
+	unsigned char a:3,
+		      b:4,
+		      c:1;
+#else
+	unsigned char c:1,
+		      b:4,
 		      a:3;
 #endif
 	};
@@ -37,11 +55,10 @@ int main(void)
 	}
 	printf("\n");
 
-	t.e = 0x12;
+	t.e = 0xab;
 	printf("t.a = %d\n", t.a);
 	printf("t.b = %d\n", t.b);
 	printf("t.c = %d\n", t.c);
-	printf("t.d = %d\n", t.d);
 
 	return 0;
 }
